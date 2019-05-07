@@ -6,18 +6,18 @@
 
 import re, time, sys
 
-class file_1002():
+class file_1003():
 
     def __init__(self):
 
-        self.f_id = 1002
+        self.f_id = 1003
 
-        self.core = "/proc/self/environ"
+        self.core = "/proc/self/cwd"
         self.system = ["linux"]
-        self.description = "/proc下环境变量"
+        self.description = "/proc下路径"
         
     def analysis(self, content):
         if content != '':
-            return '环境变量: {}'.format(content)
+            return '/proc/self/路径为: {}'.format(content)
         return False
         

@@ -7,13 +7,7 @@
 import os, time
 import logging
 
-import logging,time
-
-import os
-
-
-cur_path = os.path.dirname(os.path.realpath(__file__))
-#cur_path = os.path.realpath(__file__)
+cur_path = os.path.realpath(__file__)
 log_path = os.path.join(os.path.dirname(cur_path), 'logs')
 # 存在根目录下
 
@@ -67,4 +61,4 @@ class Log(object):
     def error(self, message):
         self.__console('error', message)
 
-log = Log('Scanner')
+log = Log('LookLook')

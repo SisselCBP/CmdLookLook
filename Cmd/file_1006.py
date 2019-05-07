@@ -6,11 +6,11 @@
 
 import re, time, sys
 
-class file_1002():
+class file_1006():
 
     def __init__(self):
 
-        self.f_id = 1002
+        self.f_id = 1006
 
         self.core = "/proc/self/environ"
         self.system = ["linux"]

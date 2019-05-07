@@ -5,43 +5,43 @@
 # 这只竹鼠很漂亮呀
 
 """
-本文件负责导入规则。
+本文件负责导入文件和命令。
 """
 
 import re, os, sys
+import importlib
 
-from settings import *
-from log import log
-
-class Script(object):
+class LoadFile(object):
     def __init__(self):
-        self.script_path = SCRIPT_PATH
-        if not os.path.exists(self.script_path):
-            log.error("[INIT] can't found scripts in '%s' !", self.script_path)
+        self.cmd_path = './Cmd'
+        if not os.path.exists(self.cmd_path):
+            pass
             #os.mkdir(self.rules_path) # 创建规则目录
+        self.file_list = self.list_parse()
 
-        self.rule_list = self.list_parse()
-
+        self.result = []
         # import function from rule
-        self.rule_dict = {}
-        for rule in self.rule_list:
-            rulename = rule.split('.')[0]
-            rulefile = RULES_MODULES_PATH + rulename
-            self.rule_dict[rulename] = __import__(rulefile, fromlist=rulename)
+        for file_ in self.file_list:
+            file_name = file_.split('.')[0]
+            file_file = 'Cmd.'+ file_name
+
+            my_module = importlib.import_module(file_file)
+            my_class = getattr(my_module, file_name)
+            self.result.append(my_class)
+
 
     def list_parse(self):
-        files = os.listdir(self.rules_path)
+        files = os.listdir(self.cmd_path)
         result = []
 
         for f in files:
-            if f.startswith(ETH_RULES_NAME):
+            if f.startswith('file_') and (not f.endswith('pyc')):
                 result.append(f)
-
         return result
 
-if __name__ == '__main__':
-    rule = Rule()
-    #print rule.rule_dict['eth_1000']
-    rule_test = rule.rule_dict['eth_1000'].eth_1000
+def load():
+    load_ = LoadFile()
+    return load_.result
 
-    rule_test.main()
+if __name__ == '__main__':
+    pass
